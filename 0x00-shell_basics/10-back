@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/basqh
 source 10-back.sh

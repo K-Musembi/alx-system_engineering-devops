@@ -1,2 +1,2 @@
 #!/bin/sh
-find . -maxdepth 1 -type f -name '*.html' -exec cp -u -n {} ../ \;
+find . -name "*.html" -exec sh -c 'cp -u "$0" "../$(basename "$0")"' {} \;
