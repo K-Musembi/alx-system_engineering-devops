@@ -1,2 +1,2 @@
 #!/bin/bash
-source 14-copy_html.sh
+cp -un *.html ../
