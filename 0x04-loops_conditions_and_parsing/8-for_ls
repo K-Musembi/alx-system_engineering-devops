@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#Script to display files in directory
+
+for folder in *; do
+	if [ -f "$folder" ]; then
+		title=$(echo "$folder" | cut -d '-' -f 2-)
+		echo "$title"
+	fi
+done
