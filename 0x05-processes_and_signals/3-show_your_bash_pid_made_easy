@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#script to display pid and process name
+
+s_pid=$$
+b_pid=$(pgrep -o bash)
+
+echo "$b_pid bash"
+echo "$s_pid bash"

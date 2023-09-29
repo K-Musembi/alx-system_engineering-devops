@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#script to terminate another script
+
+name="7-highlander"
+name_pid=$(pgrep -f "$name")
+
+kill -9 "$name_pid"

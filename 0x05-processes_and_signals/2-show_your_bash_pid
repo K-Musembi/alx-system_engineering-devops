@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#script to show lines containing bash
+# shellcheck disable=SC2009
+
+columns="user,pid,cpu,%mem,vsz,rss,tty,stat,start,time,cmd"
+
+ps axo "$columns" --forest | grep "bash"
