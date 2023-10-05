@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#listen to port 98
+
+socket=98
+
+nc -l -p $socket

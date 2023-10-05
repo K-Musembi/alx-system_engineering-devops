@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#display all active IPv$ IP's on device
+
+addresses=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*')
+
+if [ -n "$addresses" ]; then
+	echo "$addresses"
+else
+	:
+fi
