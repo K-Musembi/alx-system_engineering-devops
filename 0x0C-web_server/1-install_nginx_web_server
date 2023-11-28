@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Install Nginx on remote server
+
+apt-get update
+
+apt-get install -y nginx
+
+sed -i 's/^\(\s*listen\s*\)80;/\180;/' /etc/nginx/sites-available/default
+
+echo "Hello World!" | tee /var/www/html/index.html > /dev/null
+
+kill -s HUP $(pgrep nginx)
