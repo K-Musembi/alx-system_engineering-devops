@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Configure 404 error message
+
+apt update
+
+apt install -y nginx
+
+custom_error_conf="/etc/nginx/sites-available/custom_error"
+
+echo "
+server {
+	error_page 404 =404 /404;
+    	location = /404 {
+        	internal;
+        	add_header Content-Type 'text/plain';
+        	return 404 'HTTP/1.1 404 Not Found\n
+		Server: nginx/1.4.6 (Ubuntu)\n
+		Date: $(date -uR)\nContent-Type: text/plain\n
+		Content-Length: 26\n
+		Connection: keep-alive\n\n
+		Ceci n'\''est pas une page\n';
+    }
+}" > "$custom_error_conf"
+
+ln -s /etc/nginx/sites-available/custom_error /etc/nginx/sites-enabled/
+
+if [ $? -eq 0 ]; then
+    nginx -s reload

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Permanently redirect to another page
+
+apt update
+
+apt install -y nginx
+
+bash -c 'cat > /etc/nginx/sites-available/my_redirect.conf << EOF
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	server_name _;
+
+	location /redirect_me {
+		return 301 http://alxafrica.com;
+	}
+}
+EOF'
+
+ln -s /etc/nginx/sites-available/my_redirect.conf /etc/nginx/sites-enabled/
+
+kill -s HUP $(pgrep nginx)
