@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Custom header 'Served-By'
+
+sudo apt update
+
+sudo apt install -y nginx
+
+HOSTNAME=$(hostname)
+
+CONFIG_FILE="/etc/nginx/sites-available/default"
+
+sudo bash -c "cat <<EOF > $CONFIG_FILE
+
+server {
+	listen 80 default_server;
+    	listen [::]:80 default_server;
+
+	server_name _;
+	
+	add_header X-Served-By $HOSTNAME;
+}
+EOF"
+
+sudo systemctl restart nginx
