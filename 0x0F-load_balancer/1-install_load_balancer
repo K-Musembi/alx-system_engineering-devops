@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install and configure load balancer
+#Install and configure load balancer
 
 sudo apt update
 
@@ -27,6 +27,7 @@ defaults
 
 frontend http_front
     bind *:80
+    mode http
     default_backend http_back
 
 backend http_back
@@ -35,4 +36,7 @@ backend http_back
     server web-02 3.85.16.195:80 check
 EOF
 
-sudo service haproxy reload
+
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+sudo service haproxy restart
