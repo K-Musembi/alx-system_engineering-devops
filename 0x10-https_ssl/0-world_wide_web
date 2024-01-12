@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#Print the sub-domain and ip
+
+output() {
+	echo "The subdomain www is A record and points to 100.26.11.136"
+	echo "The subdomain lb-01 is A record and points to 100.26.11.136"
+	echo "The subdomain web-01 is A record and points to 34.224.83.243"
+	echo "The subdomain web-02 is A record and points to 35.153.67.53"
+}
+
+if [ "$#" -eq 1 ]; then
+	output
+elif [ "$#" -ge 2 ]; then
+	second=$(echo "$2" | awk '{print $1}')
+
+	if [ "$second" == "www" ]; then
+		echo "The subdomain www is A record and points to 100.26.11.136"
+	elif [ "$second" == "lb-01" ]; then
+		echo "The subdomain lb-01 is A record and points to 100.26.11.136"
+	elif [ "$second" == "web-01" ]; then
+		echo "The subdomain web-01 is A record and points to 34.224.83.243"
+	elif [ "$second" == "web-02" ]; then
+		echo "The subdomain web-02 is A record and points to 35.153.67.53"
+	fi
+fi
+
+
+
