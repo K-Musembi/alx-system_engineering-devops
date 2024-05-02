@@ -30,8 +30,8 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-    server web-01 34.224.83.243:80 check
-    server web-02 35.153.67.53:80 check
+    server web-01 54.197.94.136:80 check
+    server web-02 18.204.10.0:80 check
 
 backend letsencrypt-backend
     server letsencrypt 127.0.0.1:54321
