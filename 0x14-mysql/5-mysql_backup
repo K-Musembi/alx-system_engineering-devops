@@ -6,7 +6,7 @@ day=$(date +%d)
 month=$(date +%m)
 year=$(date +%Y)
 
-sudo mysqldump -u root --all-databases > backup.sql
+sudo mysqldump -u root --all-databases | sudo tee backup.sql > /dev/null
 unset MYSQL_PASSWORD
 
-sudo tar -czvf $day-$month-$year.tar.gz backup.sql
+sudo tar -czvf "$day"-"$month"-"$year".tar.gz backup.sql
