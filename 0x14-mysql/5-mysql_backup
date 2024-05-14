@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#Create a backup of mysql databases
+
+export MYSQL_PASSWORD=$1
+day=$(date +%d)
+month=$(date +%m)
+year=$(date +%Y)
+
+sudo mysqldump -u root --all-databases > backup.sql
+unset MYSQL_PASSWORD
+
+sudo tar -czvf $day-$month-$year.tar.gz backup.sql
