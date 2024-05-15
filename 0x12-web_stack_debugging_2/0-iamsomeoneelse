@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#Switch to new user from root user
+
+user=$1
+
+sudo useradd -m -s /bin/bash "$user"
+
+sudo su - "$user" -c 'bash -c "whoami"'

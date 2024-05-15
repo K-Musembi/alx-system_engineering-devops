@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#Configure Nginx to run as nginx user
+
+sudo useradd -r -s /bin/bash nginx
+
+sudo chown -R nginx:nginx /etc/nginx
+
+sudo sed -i "s/user.*/user nginx;/" /etc/nginx/nginx.conf
+
+listen="server {
+	listen *:8080;
+}"
+
+sudo sh -c "echo '$listen' >> /etc/nginx/sites-available/default"
+
+sudo nginx -t
+
+exit_code=$?
+
+if [ $exit_code -eq 0 ]; then
+	sudo service nginx reload
+fi
