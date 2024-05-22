@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""Fetch data using REST API
-"""
+"""Fetch data using REST API"""
 
 import json
 import requests
 import sys
+import csv
 
 
 if len(sys.argv) != 2:
@@ -20,33 +20,33 @@ response = requests.get(f"https://jsonplaceholder.typicode.com/todos")
 users_list = requests.get(f"https://jsonplaceholder.typicode.com/users")
 
 users = users_list.json()
+lst = response.json()
+
 for user in users:
     if user["id"] == emp_id:
         name = user["name"]
+        username = user["username"]
 
-lst = response.json()
-
-total_tasks = 0
-done_tasks = []
-
+data = []
 for obj in lst:
+    new_lst = []
     if obj["userId"] == emp_id:
-        total_tasks += 1
-        if obj["completed"]:
-            done_tasks.append(obj["title"])
+        status = obj["completed"]
+        title = obj["title"]
+        new_lst = [str(emp_id), username, str(status), title]
+        data.append(new_lst)
 
-total_done = len(done_tasks)
+filename = "2.csv"
 
-print(f"Employee {name} is done with tasks({total_done}/{total_tasks}):")
-for task in done_tasks:
-    print(f"  {task}")
+with open(filename, 'w', newline="") as file:
+    writer = csv.writer(file, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+    writer.writerows(data)
 
 
 def main():
     """Empty function"""
-
     pass
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

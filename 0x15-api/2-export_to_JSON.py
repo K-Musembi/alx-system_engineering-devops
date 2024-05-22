@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Fetch data using REST API
-"""
+"""Fetch data using REST API"""
 
 import json
 import requests
@@ -20,33 +19,34 @@ response = requests.get(f"https://jsonplaceholder.typicode.com/todos")
 users_list = requests.get(f"https://jsonplaceholder.typicode.com/users")
 
 users = users_list.json()
+lst = response.json()
 for user in users:
     if user["id"] == emp_id:
         name = user["name"]
+        username = user["username"]
 
-lst = response.json()
-
-total_tasks = 0
-done_tasks = []
+data = []
 
 for obj in lst:
+    new_lst = {}
     if obj["userId"] == emp_id:
-        total_tasks += 1
-        if obj["completed"]:
-            done_tasks.append(obj["title"])
+        status = obj["completed"]
+        task = obj["title"]
+        new_lst.update(
+            {"task": task, "completed": status, "username": username})
+        data.append(new_lst)
 
-total_done = len(done_tasks)
+emp_tasks = {str(emp_id): data}
 
-print(f"Employee {name} is done with tasks({total_done}/{total_tasks}):")
-for task in done_tasks:
-    print(f"  {task}")
+filename = "2.json"
+
+with open(filename, "w", encoding="utf-8") as file:
+    json.dump(emp_tasks, file)
 
 
 def main():
-    """Empty function"""
-
     pass
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
