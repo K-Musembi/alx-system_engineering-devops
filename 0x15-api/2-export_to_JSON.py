@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Fetch data using REST API"""
+"""send data to json using REST API"""
 
 import json
 import requests

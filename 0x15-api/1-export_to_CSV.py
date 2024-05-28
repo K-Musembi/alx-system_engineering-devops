@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""Fetch data using REST API"""
+"""Send data to csv using REST API"""
 
+import csv
 import json
 import requests
 import sys
-import csv
 
 
 if __name__ == '__main__':
