@@ -4,6 +4,7 @@
 import json
 import requests
 
+
 response = requests.get(f"https://jsonplaceholder.typicode.com/todos")
 
 users_list = requests.get(f"https://jsonplaceholder.typicode.com/users")
